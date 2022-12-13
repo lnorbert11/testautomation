@@ -8,15 +8,12 @@ Feature: As a customer,
       Given open main page
       And accept cookies
 
-    Scenario Outline: Change language
+    Scenario Outline: successful login
       Given language is set to "<language>"
-      When user clicks on "<sign_in>"
-      And user types "<email>"
-      And user types "<password>"
-      And user clicks on "<sign_in>"
+      When user clicks on "<sign_in>" button and logs in with "<email>" and "<password>"
       Then "<welcomeheader>" is shown
 
       Examples:
         | language | sign_in | email | password | welcomeheader |
-        | hungarian | Bejelentkezés |gipsz.jakab@noreply.com | Qwerty1234 | Üdvözlünk Jakab |
-        | english | Sign in | gipsz.jakab@noreply.com | Qwerty1234 | Hello Jakab |
+        | Magyar | Bejelentkezés |gipsz.jakab@noreply.com | Qwerty1234 | Üdvözlünk Jakab |
+        | English | Sign in | gipsz.jakab@noreply.com | Qwerty1234 | Hello Jakab |

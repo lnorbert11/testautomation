@@ -8,13 +8,13 @@ Feature: As a customer,
       Given open main page
       And accept cookies
 
-    Scenario Outline: Change language
+    Scenario Outline: successful sign out
       Given language is set to "<language>"
-      Given customer is signed in
-      When user clicks on "<sign_out>"
-      Then "<sign_in>" link is shown
+      And customer is signed in "<sign_in>" with credentials "gipsz.jakab@noreply.com" and "Qwerty1234"
+      When user clicks on "<sign_out>" sign out button
+      Then "<sign_in>"  sign in link is shown
 
       Examples:
         | language | sign_out | sign_in |
-        | hungarian | Kijelentkezés | Bejelentkezés |
-        | english | Sign out | Sign in |
+        | Magyar | Kijelentkezés | Bejelentkezés |
+        | English | Sign out | Sign in |
