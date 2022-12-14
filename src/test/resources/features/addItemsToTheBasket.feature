@@ -1,4 +1,4 @@
-Feature:_As a customer,
+Feature:As a customer,
   I want to be able to put items to my basket,
   so that I can purchase them.
 
@@ -9,9 +9,8 @@ Feature:_As a customer,
       And accept cookies
 
     Scenario: Adding items to the basket
-      Given language is set to "english"
-      When user search for products and adding them to the basket
-      | Roberto Wholemeal Bread   |
-      | Dublin Dairy Cheddar Red  |
-      | Red California Paprika    |
+      Given language is set to "English"
+      And customer is signed in "Sign in" with credentials "gipsz.jakab@noreply.com" and "Qwerty1234"
+      When user searches for products and adding them to the basket
       Then products are shown in the basket
+

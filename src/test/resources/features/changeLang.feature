@@ -11,9 +11,9 @@ Feature: As a customer,
     Scenario Outline: Change language
       Given language is set to "<language>"
       When change language to "<new_language>"
-      Then it shows elements in "<new_language>"
+      Then it shows elements in "<new_language>" with search placeholder "<searchPlaceholder>"
 
       Examples:
-       | language | new_language |
-       | hungarian | english |
-       | english | hungarian |
+       | language | new_language |searchPlaceholder|
+       | Magyar | English |Search|
+       | English | Magyar |Keresés|

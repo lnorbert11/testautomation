@@ -1,19 +1,31 @@
 package hu.masterfield.pages;
 
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byAttribute;
+import static com.codeborne.selenide.Selectors.byTagName;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SignInPage {
-    SelenideElement emailTextBox = $(Selectors.byId("email"));
-    SelenideElement passwordTextBox = $(Selectors.byId("password"));
-    SelenideElement signInButton = $(Selectors.byAttribute("type","submit"));
+    SelenideElement emailTextBox = $("#email");
+    SelenideElement passwordTextBox = $("#password");
+    SelenideElement signInButton = $(byAttribute("type","submit"));
 
-    public void fillSignInFormAndClickOnSignInButton(String email,String password)  {
+    //SelenideElement signInTitle = $(byTagName("title"));
+
+    public void validateSignInPage(){
+        emailTextBox.shouldBe(visible).shouldBe(enabled);
+        passwordTextBox.shouldBe(visible).shouldBe(enabled);
+        signInButton.shouldBe(visible).shouldBe(enabled);
+    }
+
+    public HomePage signIn(String email, String password)  {
         emailTextBox.sendKeys(email);
         passwordTextBox.sendKeys(password);
         signInButton.click();
+        return new HomePage();
     }
 
 }

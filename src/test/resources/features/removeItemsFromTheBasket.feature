@@ -9,7 +9,8 @@ Feature: As a customer,
       And accept cookies
 
     Scenario: Removing item from the basket
-      Given language is set to "english"
-      Given there is an item in the basket
-      When user clicks on remove item button
-      Then Item is no more shown in the basket
+      Given language is set to "English"
+      And customer is signed in "Sign in" with credentials "gipsz.jakab@noreply.com" and "Qwerty1234"
+      And there are items in the basket
+      When user removes every item from the basket
+      Then there is no items in the basket
