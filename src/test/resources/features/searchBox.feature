@@ -1,3 +1,4 @@
+@ImplementedFeature
 Feature: As a customer,
   I want to use a searchbox,
   so that I can easily find the sought product.

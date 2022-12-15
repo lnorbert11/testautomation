@@ -1,3 +1,4 @@
+@ImplementedFeature
 Feature: As a customer,
   I want to be able to sign out from the page after the purchase,
   so that no one else can use my useraccount.
@@ -8,6 +9,7 @@ Feature: As a customer,
       Given open main page
       And accept cookies
 
+      @signout
     Scenario Outline: successful sign out
       Given language is set to "<language>"
       And customer is signed in "<sign_in>" with credentials "gipsz.jakab@noreply.com" and "Qwerty1234"

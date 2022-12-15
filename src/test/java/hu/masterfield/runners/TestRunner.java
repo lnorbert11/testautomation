@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = "classpath:features",
                 //features = "@target/cucumber-rerun.txt",  //így csak azt futtatja ami előzőleg hibára futott
                 publish = true, //a felhőbe ahol 24 órán keresztül meg lehet nézni a reportot
-                //tags = "@Datatable or @ChangeLangData", //csak ezeket a taggel rendelkező teszteket futtatja
+                tags = "@signout", //csak ezeket a taggel rendelkező teszteket futtatja
                 glue = "hu.masterfield.steps",
                 plugin = {"pretty","json:target/cucumber-reports.json",
                         "junit:target/cucumber-reports.xml",

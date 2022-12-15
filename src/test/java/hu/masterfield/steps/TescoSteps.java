@@ -1,6 +1,7 @@
 package hu.masterfield.steps;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
 import hu.masterfield.pages.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -13,6 +14,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.FileInputStream;
@@ -32,17 +35,23 @@ public class TescoSteps {
     @Before
     public void setup() {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         options.addArguments("--disable-blink-features=AutomationControlled");
+        System.setProperty("chromeoptions.args","\"--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36\"");
         WebDriverManager.chromedriver().setup();
+        Configuration.browserSize = "1980x1000";
         Configuration.browserCapabilities = options;
-
         System.out.println("setup code");
+
     }
 
 
     @Given("open main page")
     public void openMainPage() {
         HomePage homePage = open(HomePageUrl, HomePage.class);
+        WebDriver driver = WebDriverRunner.getWebDriver();
+        String userAgent = (String) ((JavascriptExecutor) driver).executeScript("return navigator.userAgent;");
+        System.out.println(userAgent);
         String title = TescoTitle;
         homePage.validateHomePage(title);
     }
@@ -181,8 +190,16 @@ public class TescoSteps {
 
     @And("there are items in the basket")
     public void thereAreItemsInTheBasket() throws IOException, InterruptedException {
-        userSearchesForProductsAndAddingThemToTheBasket();
-        productsAreShownInTheBasket();
+        BasketPage basketPage = new BasketPage();
+        System.out.println(basketPage.getBasketSize());
+        if(!(basketPage.getBasketSize()>0))
+        {
+            System.out.println("There is no items in the basket");
+            userSearchesForProductsAndAddingThemToTheBasket();
+            productsAreShownInTheBasket();
+        }else {
+            System.out.println("There are already items in the basket");
+        }
     }
 
     @When("user removes every item from the basket")
@@ -233,5 +250,35 @@ public class TescoSteps {
 
     }
 
+//Change the amount of displayed products
+    @And("More less link is set to {string}")
+    public void moreLessLinkIsSetTo(String showDisplayedItemText) {
+        ResultsPage resultsPage = new ResultsPage();
+        resultsPage.setMoreLessLink(showDisplayedItemText);
+    }
 
+    @When("user sets {string}")
+    public void userSets(String showDisplayedItemText) throws InterruptedException {
+        Thread.sleep(3000);
+        moreLessLinkIsSetTo(showDisplayedItemText);
+        Thread.sleep(3000);
+    }
+
+    @Then("{string} items are shown on the page")
+    public void itemsAreShownOnThePage(String amountOfDisplayedItems) {
+        ResultsPage resultsPage = new ResultsPage();
+        resultsPage.validateAmountOfDisplayedItems(Integer.valueOf(amountOfDisplayedItems));
+    }
+
+    @Test
+    public void test(){
+        String itemsCount =  "5 items";
+        System.out.println("items count: "+itemsCount);
+
+        String[] itemsCountArray = itemsCount.split(" ");
+        System.out.println("found items:"+itemsCountArray[0]+" and "+itemsCountArray[1]);
+        //int foundItems = Integer.valueOf(itemsCount.split("\\d")[0]);
+
+        //System.out.println("found items: "+foundItems);
+    }
 }

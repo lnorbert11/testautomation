@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byAttribute;
-import static com.codeborne.selenide.Selectors.byTagName;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SignInPage {
@@ -22,8 +21,16 @@ public class SignInPage {
     }
 
     public HomePage signIn(String email, String password)  {
-        emailTextBox.sendKeys(email);
-        passwordTextBox.sendKeys(password);
+
+
+/*
+        WebDriver driver = WebDriverRunner.getWebDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.getElementById('email').setAttribute('value', 'gipsz.jakab@noreply.com')");
+
+ */
+        emailTextBox.setValue(email);
+        passwordTextBox.setValue(password);
         signInButton.click();
         return new HomePage();
     }

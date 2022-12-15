@@ -1,3 +1,4 @@
+@ImplementedFeature
 Feature: As a customer,
   I want to be able to change the application's language,
   so that I can read the content and functions in different languages.
@@ -8,6 +9,7 @@ Feature: As a customer,
         Given open main page
         And accept cookies
 
+    @implemented
     Scenario Outline: Change language
       Given language is set to "<language>"
       When change language to "<new_language>"

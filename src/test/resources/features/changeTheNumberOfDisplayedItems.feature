@@ -1,5 +1,6 @@
+@ImplementedFeature
 Feature: As a customer,
-  I want to increase(48) or decrease(24) the number of displayed items,
+  I want to increase or decrease the number of displayed items,
   so that I can see more or less items on the page.
 
   Rule: It is allowed to change the amount of products shown on the page
@@ -8,24 +9,27 @@ Feature: As a customer,
       Given open main page
       And accept cookies
 
-    Scenario Outline: Change the amount of products to 24
+    Scenario Outline: Change the amount of displayed products to 24
       Given language is set to "<language>"
-      When user searches for "<item>"
-      And user sets "<24items>"
-      Then "<items_shown>" on the page
+      And customer searches for a "<product>"
+      And More less link is set to "<48items>"
+      When user sets "<24items>"
+      Then "24" items are shown on the page
 
       Examples:
-        | language | item | 24items | items_shown |
-        | hungarian | kenyér | 24 termék megjelenítése oldalanként | 24 |
-        | english | bread | Show 24 per page | 24 |
+        | language | product | 24items |48items |
+        | Magyar | kenyér | 24 termék megjelenítése oldalanként | 48 termék megjelenítése oldalanként |
+        | English | bread | Show 24 per page | Show 48 per page |
 
-    Scenario Outline: Change the amount of products to 24
+    Scenario Outline: Change the amount of displayed products to 48
       Given language is set to "<language>"
-      When user searches for "<item>"
-      And user sets "<48items>"
-      Then "<items_shown>" on the page
+      And customer searches for a "<product>"
+      And More less link is set to "<24items>"
+      When user sets "<48items>"
+      Then "48" items are shown on the page
 
       Examples:
-        | language | item | 48items | items_shown |
-        | hungarian | kenyér | 48 termék megjelenítése oldalanként | 48 |
-        | english | bread | Show 48 per page | 48 |
+        | language | product | 24items | 48items |
+        | Magyar | kenyér | 24 termék megjelenítése oldalanként | 48 termék megjelenítése oldalanként |
+        | English | bread | Show 24 per page | Show 48 per page |
+

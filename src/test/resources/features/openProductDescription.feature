@@ -1,3 +1,4 @@
+@ImplementedFeature
 Feature: As a customer,
   I want to be able to open a product,
   so that I can see its detailed description.

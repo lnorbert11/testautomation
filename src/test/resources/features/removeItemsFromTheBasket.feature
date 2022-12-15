@@ -1,3 +1,4 @@
+@ImplementedFeature
 Feature: As a customer,
   I want to be able to remove items form my basket,
   so that I can avoid to buy them.

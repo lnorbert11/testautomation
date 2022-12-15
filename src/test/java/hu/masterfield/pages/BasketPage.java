@@ -6,13 +6,12 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
 
 public class BasketPage {
-    SelenideElement basket = $(".mini-trolley__content-list");
+    //SelenideElement basket = $(".mini-trolley__content-list");
     ElementsCollection removeItemButton = $$(".delete-single-item");
 
     ElementsCollection basketItems = $$(".mini-trolley__content-item");
@@ -21,6 +20,10 @@ public class BasketPage {
     public void validateBasketSize(int productListSize) {
         System.out.println("Basket size: " + basketItems.size());
         assertEquals(productListSize, basketItems.size());
+    }
+
+    public int getBasketSize(){
+        return basketItems.size();
     }
 
     public void validateBasketContent(String product, String quantity) {
