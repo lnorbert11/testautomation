@@ -1,4 +1,4 @@
-#@ImplementedFeature
+@ImplementedFeature
 Feature: As a customer,
   I want to use my registered user account,
   so that I can put products to my basket.
@@ -9,7 +9,7 @@ Feature: As a customer,
       Given open main page
       And accept cookies
 
-
+#@Signin
     Scenario Outline: successful login
       Given language is set to "<language>"
       When user clicks on "<sign_in>" button and logs in with "<email>" and "<password>"

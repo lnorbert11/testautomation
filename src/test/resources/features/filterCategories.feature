@@ -1,3 +1,4 @@
+#Not implemented feature
 Feature: As a customer,
   I want to filter the products by categories,
   so that I can reduce the number of displayed items.

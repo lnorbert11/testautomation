@@ -1,0 +1,16 @@
+@objects
+    categoryHeading         css #results>h1
+    itemCard                css .product-list>li
+
+= Header section =
+    @on desktop
+        categoryHeading:
+            width   715px
+            height  40px
+
+= Result section =
+    @on desktop
+        @forEach [itemCard] as card
+            ${card}:
+                width   242px
+                height  529px

@@ -1,3 +1,4 @@
+#Not implemented feature
 Feature: As a customer,
   I want to be able to register to the application,
   so that I can purchase products.

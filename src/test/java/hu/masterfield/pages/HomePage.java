@@ -2,6 +2,13 @@ package hu.masterfield.pages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
+import com.galenframework.api.Galen;
+import com.galenframework.reports.model.LayoutReport;
+import hu.masterfield.layout.TestDevice;
+import org.openqa.selenium.WebDriver;
+
+import java.io.IOException;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -74,6 +81,12 @@ public class HomePage {
 
         searchButton.click();
         return new ResultsPage();
+    }
+
+    public LayoutReport validateHomePageWithGalen(WebDriver driver,TestDevice device) throws IOException {
+        //WebDriver driver = WebDriverRunner.getWebDriver();
+        LayoutReport layoutReport = Galen.checkLayout(driver,"specs/productsLayout.gspec",device.getTags());
+        return layoutReport;
     }
 
 }

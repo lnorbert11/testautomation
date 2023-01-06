@@ -1,7 +1,6 @@
 package hu.masterfield.steps;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.*;
 import hu.masterfield.pages.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -15,8 +14,10 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,8 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class TescoSteps {
 
@@ -38,11 +38,10 @@ public class TescoSteps {
         options.addArguments("--headless");
         options.addArguments("--disable-blink-features=AutomationControlled");
         System.setProperty("chromeoptions.args","\"--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36\"");
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().browserVersion("108.0.5359.71").setup(); //másik böngészővel
         Configuration.browserSize = "1980x1000";
         Configuration.browserCapabilities = options;
         System.out.println("setup code");
-
     }
 
 
@@ -270,8 +269,11 @@ public class TescoSteps {
         resultsPage.validateAmountOfDisplayedItems(Integer.valueOf(amountOfDisplayedItems));
     }
 
+
+
     @Test
-    public void test(){
+    public void test() throws InterruptedException {
+        /*
         String itemsCount =  "5 items";
         System.out.println("items count: "+itemsCount);
 
@@ -280,5 +282,17 @@ public class TescoSteps {
         //int foundItems = Integer.valueOf(itemsCount.split("\\d")[0]);
 
         //System.out.println("found items: "+foundItems);
+        */
+
+        open("https://raczpeterantal.hu/chapters/Chapter01.html");
+        SelenideElement email = $("#html5div");
+
+        String s = Keys.chord(Keys.
+                ALT,"v");
+        //email.sendKeys(s);
+        actions().click(email).keyDown(Keys.CONTROL).keyDown(Keys.LEFT_ALT).keyDown("v").perform();
+
+
+        Thread.sleep(5000);
     }
 }
